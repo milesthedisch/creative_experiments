@@ -1,0 +1,20 @@
+/**
+ * Base: Typography
+ */
+
+// Code Pro //
+
+@include generateFont('Code Pro', 'Code Pro Light', 200);
+@include generateFont('Code Pro', 'Code Pro Regular', 400);
+@include generateFont('Code Pro', 'Code Pro Bold', 600);
+
+html, body {
+    font-family: "Code Pro";
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
+}
+
+
+// Generate type-scale elements
+@include generateTypeScaleStyles();

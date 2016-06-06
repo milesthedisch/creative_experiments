@@ -1,0 +1,24 @@
+@mixin clear-spacer-vertical {
+    margin-top: 0px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+@mixin clear-spacer-horizontal {
+    margin-left: 0px;
+    padding-left: 0px;
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
+@mixin clear-spacer {
+    @include clear-spacer-vertical;
+    @include clear-spacer-horizontal;
+}
+
+@mixin center-abs-horizontal {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}

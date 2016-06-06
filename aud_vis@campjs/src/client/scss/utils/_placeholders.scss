@@ -1,0 +1,37 @@
+/**
+ * Utils: Placeholders
+ */
+
+* {
+    box-sizing: border-box; 
+}
+
+html, body {
+    background-color: black;
+}
+
+// Clearfix
+%clearfix:after {
+    clear: both;
+    content: '';
+    display: table;
+}
+
+.clearfix {
+    @extend %clearfix;
+}
+
+// Vertical align
+%vertical-align {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+// Absolute center align
+%absolute-center-align {
+    left: 50%;
+    position: relative;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
