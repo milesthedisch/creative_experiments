@@ -1,0 +1,614 @@
+@charset "UTF-8";
+/**
+ * Utils: Variables
+ */
+/**
+ * Breakpoints
+ *
+ * @key   {string} - Name of breakpoint
+ * @value {string} - Type of breakpoint (min, max)
+ * @value {int}    - Width that breakpoint starts
+ * @value {int}    - Number of columns for grid
+ * @value {int}    - Gutter width for each column
+ * @value {int}    - Vertical Grid height
+ */
+/**
+ * Type-scales
+ *
+ * @key   {string}       - Name of breakpoint
+ * @key   {string}       - Name of element
+ * @key   {string}       - Property
+ * @value {string | int} - Value of property
+ */
+/**
+ * Utils: Functions
+ */
+/**
+ * em
+ *
+ * Converts px value to em
+ *
+ * @param {int} $target  - Value to be converted
+ * @param {int} $context - The context the `$target` will be divided by
+ * @return {string}
+ */
+/**
+ * lines
+ *
+ * @param {int} $lines   - Number of lines high you wish the element to be
+ * @param {int} $context - Value of current font-size (Default: $DEFAULT-FONT-SIZE)
+ * @return {string}
+ */
+/**
+ * getKeyOfIndexFromMap
+ *
+ * Returns the name of the key at $index of $map
+ *
+ * @param  {number} $index - The index of the key you want the name of
+ * @param  {map}    $map   - The map you wish to search for $index in
+ * @return {string}
+ */
+/**
+ * getIndexOfKeyFromMap
+ *
+ * Returns the index of the $key in $map
+ *
+ * @param  {map}    $map - The map you wish to search for $key in
+ * @param  {string} $key - The key you wish to get the index of
+ * @return {number}
+ */
+/**
+ * getValueOfKeyFromMap
+ *
+ * Returns the value of $key in $map
+ *
+ * @param  {map}           $map - The map you wish to search for the value of $key in
+ * @param  {string}        $key - The key you wish to get the value for
+ * @return {number|string}
+ */
+/**
+ * getTypeScaleFromBreakpoint
+ *
+ * Returns the value of $type-scale in $breakpoint of $type-scale-map
+ * Searches recursively backwards through $type-scale-map if $type-scale is not found in $breakpoint
+ *
+ * @param  {string}        $type-scale - The property that you wish to get the value of
+ * @param  {string}        $breakpoint - The breakpoint that you wish to search
+ * @return {number|string}
+ */
+/**
+ * getPropertyFromTypeScale
+ *
+ * Returns the value of $property of $type-scale in $breakpoint of $type-scale-map
+ *
+ * @param  {string}        $property       - The property you wish to get the value of
+ * @param  {string}        $type-scale     - The type-scale you wish to get $property from
+ * @param  {string}        $breakpoint     - The breakpoint you want to $property from $type-scale in
+ * @param  {map}           $type-scale-map - The map you wish to search for $breakpoint
+ * @return {number|string}
+ */
+/**
+ * getAllPropertiesFromTypeScale
+ * @param  {string} $type-scale     - The type scale you wish to get the properties of
+ * @param  {string} $breakpoint:    - The breakpoint you wish to get $type-scale from
+ * @param  {map}    $type-scale-map - The map you wish to search for $breakpoint
+ * @return {map}
+ */
+/**
+ * Utils: Mixins
+ */
+/**
+ * breakpoint
+ *
+ * Iterate through $BREAKPOINTS and generate media queries
+ *
+ * @param {string} $breakpoint - Key in $BREAKPOINTS map
+ */
+/**
+ * generateFont
+ *
+ * Generate font-face declaration
+ * Assumes you follow the following directory structure:
+ *
+ * /
+ * |- fonts/
+ *   |- fontname
+ *     |- fontname.eot
+ *     |- fontname.woff
+ *     |- fontname.ttf
+ *     |- fontname.svg
+ *
+ * @param {string} $fontName - Name of the font to be used when declared
+ * @param {string} $fontFileName - Filename of the font
+ * @param {int} $fontWeight - Weight of the font (100, 200, 300, 400, 500, 600, 700, 800 | Default: 400)
+ * @param {string} $fontStyle - Style of the font (normal, italic, oblique | Default: normal)
+ */
+/**
+ * setTypeScale
+ *
+ * @param {string} $type-scale - The style you wish to use from $TYPE-SCALES-MAP
+ * @param {number} $context    - The context of the current type-scale
+ * @param {string} $breakpoint - The breakpoint in which you wish to get the $style from
+ */
+/**
+ * generateTypeScaleStyles
+ *
+ * @param {map} $type-scale-map - The map you want to generate the typescales from (Default: $TYPE-SCALES-MAP)
+ */
+/**
+ * generateGridStyles
+ *
+ * @param {map} $type-scale-map - The map you want to generate the typescales from (Default: $TYPE-SCALES-MAP)
+ */
+/**
+ * Utils: Placeholders
+ */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: black;
+}
+
+.clearfix:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+/**
+ * Base: Reset
+ */
+*, *:before, *:after {
+  border: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 100%;
+  font-smoothing: antialiased;
+  line-height: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+address, article, aside, audio, blockquote,
+canvas, dd, div, dl, fieldset, figcaption,
+figure, footer, form, h1, h2, h3, h4, h5, h6,
+header, hr, noscript, ol, output, p, pre,
+section, ul, video {
+  display: block;
+}
+
+a, abbr, b, bdo, br, button, cite, code, dfn,
+em, i, img, input, kbd, label, map, object, q,
+samp, select, small, span, strong, sub, sup,
+textarea, var {
+  display: inline;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: table;
+}
+
+/**
+ * Base: Normalise
+ */
+html {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  height: 100%;
+  line-height: 1.5em;
+  min-height: 100%;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+  width: 100%;
+}
+
+body {
+  font-size: 100%;
+  font-smoothing: antialiased;
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+  text-rendering: optimizeLegibility;
+  width: 100%;
+}
+
+img {
+  border: 0;
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: auto;
+  -ms-interpolation-mode: bicubic;
+}
+
+html:-moz-full-screen-ancestor {
+  background-color: inherit;
+}
+
+html:-webkit-full-screen-ancestor {
+  background-color: inherit;
+}
+
+html:full-screen-ancestor {
+  background-color: inherit;
+}
+
+/**
+ * Base: Colours
+ */
+/**
+ * Base: Typography
+ */
+@font-face {
+  font-family: "Code Pro";
+  src: url("../assets/fonts/Code Pro/Code Pro Light.eot?iefix");
+  src: url("../assets/fonts/Code Pro/Code Pro Light.eot?iefix") format("eot"), local("☺"), url("../assets/fonts/Code Pro/Code Pro Light.woff") format("woff"), url("../assets/fonts/Code Pro/Code Pro Light.ttf") format("truetype"), url("../assets/fonts/Code Pro/Code Pro Light.svg#Code Pro Light") format("svg");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Code Pro";
+  src: url("../assets/fonts/Code Pro/Code Pro Regular.eot?iefix");
+  src: url("../assets/fonts/Code Pro/Code Pro Regular.eot?iefix") format("eot"), local("☺"), url("../assets/fonts/Code Pro/Code Pro Regular.woff") format("woff"), url("../assets/fonts/Code Pro/Code Pro Regular.ttf") format("truetype"), url("../assets/fonts/Code Pro/Code Pro Regular.svg#Code Pro Regular") format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Code Pro";
+  src: url("../assets/fonts/Code Pro/Code Pro Bold.eot?iefix");
+  src: url("../assets/fonts/Code Pro/Code Pro Bold.eot?iefix") format("eot"), local("☺"), url("../assets/fonts/Code Pro/Code Pro Bold.woff") format("woff"), url("../assets/fonts/Code Pro/Code Pro Bold.ttf") format("truetype"), url("../assets/fonts/Code Pro/Code Pro Bold.svg#Code Pro Bold") format("svg");
+  font-weight: 600;
+  font-style: normal;
+}
+
+html, body {
+  font-family: "Code Pro";
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5em;
+  font-family: Code Pro;
+  font-weight: 200;
+}
+
+h1 {
+  font-size: 2.5em;
+  line-height: 1.575em;
+  font-family: Code Pro;
+  font-weight: 200;
+}
+
+h2 {
+  font-size: 2.25em;
+  line-height: 1.25em;
+  font-family: Code Pro;
+  font-weight: 200;
+}
+
+h3 {
+  font-size: 1.625em;
+  line-height: 1.73076923077em;
+  font-family: Code Pro;
+  font-weight: 400;
+}
+
+h4 {
+  font-family: Code Pro;
+  font-size: 1.25em;
+  font-weight: 400;
+  line-height: 1.25em;
+}
+
+h5 {
+  font-family: Code Pro;
+  font-size: 1.25em;
+  line-height: 1.25em;
+}
+
+h6 {
+  font-family: Code Pro;
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+p {
+  font-family: Code Pro;
+  font-size: 1.0625em;
+  line-height: 1.35294117647em;
+}
+
+a {
+  font-family: Code Pro;
+  font-size: 0.9375em;
+  text-transform: uppercase;
+}
+
+.col.-col-1-6 {
+  padding: 0.75em 0.3125em;
+  width: 16.6666666667%;
+}
+
+.col.-col-2-6 {
+  padding: 0.75em 0.3125em;
+  width: 33.3333333333%;
+}
+
+.col.-col-3-6 {
+  padding: 0.75em 0.3125em;
+  width: 50%;
+}
+
+.col.-col-4-6 {
+  padding: 0.75em 0.3125em;
+  width: 66.6666666667%;
+}
+
+.col.-col-5-6 {
+  padding: 0.75em 0.3125em;
+  width: 83.3333333333%;
+}
+
+.col.-col-6-6 {
+  padding: 0.75em 0.3125em;
+  width: 100%;
+}
+
+@media (min-width: 30em) {
+  .col.-phablet-col-1-6 {
+    padding: 0.75em 0.3125em;
+    width: 16.6666666667%;
+  }
+  .col.-phablet-col-2-6 {
+    padding: 0.75em 0.3125em;
+    width: 33.3333333333%;
+  }
+  .col.-phablet-col-3-6 {
+    padding: 0.75em 0.3125em;
+    width: 50%;
+  }
+  .col.-phablet-col-4-6 {
+    padding: 0.75em 0.3125em;
+    width: 66.6666666667%;
+  }
+  .col.-phablet-col-5-6 {
+    padding: 0.75em 0.3125em;
+    width: 83.3333333333%;
+  }
+  .col.-phablet-col-6-6 {
+    padding: 0.75em 0.3125em;
+    width: 100%;
+  }
+}
+
+@media (min-width: 48em) {
+  .col.-tablet-col-1-6 {
+    padding: 0.75em 0.625em;
+    width: 16.6666666667%;
+  }
+  .col.-tablet-col-2-6 {
+    padding: 0.75em 0.625em;
+    width: 33.3333333333%;
+  }
+  .col.-tablet-col-3-6 {
+    padding: 0.75em 0.625em;
+    width: 50%;
+  }
+  .col.-tablet-col-4-6 {
+    padding: 0.75em 0.625em;
+    width: 66.6666666667%;
+  }
+  .col.-tablet-col-5-6 {
+    padding: 0.75em 0.625em;
+    width: 83.3333333333%;
+  }
+  .col.-tablet-col-6-6 {
+    padding: 0.75em 0.625em;
+    width: 100%;
+  }
+}
+
+@media (min-width: 64em) {
+  .col.-laptop-col-1-6 {
+    padding: 0.75em 0.625em;
+    width: 16.6666666667%;
+  }
+  .col.-laptop-col-2-6 {
+    padding: 0.75em 0.625em;
+    width: 33.3333333333%;
+  }
+  .col.-laptop-col-3-6 {
+    padding: 0.75em 0.625em;
+    width: 50%;
+  }
+  .col.-laptop-col-4-6 {
+    padding: 0.75em 0.625em;
+    width: 66.6666666667%;
+  }
+  .col.-laptop-col-5-6 {
+    padding: 0.75em 0.625em;
+    width: 83.3333333333%;
+  }
+  .col.-laptop-col-6-6 {
+    padding: 0.75em 0.625em;
+    width: 100%;
+  }
+}
+
+@media (min-width: 85.375em) {
+  .col.-desktop-col-1-6 {
+    padding: 0.75em 0.625em;
+    width: 16.6666666667%;
+  }
+  .col.-desktop-col-2-6 {
+    padding: 0.75em 0.625em;
+    width: 33.3333333333%;
+  }
+  .col.-desktop-col-3-6 {
+    padding: 0.75em 0.625em;
+    width: 50%;
+  }
+  .col.-desktop-col-4-6 {
+    padding: 0.75em 0.625em;
+    width: 66.6666666667%;
+  }
+  .col.-desktop-col-5-6 {
+    padding: 0.75em 0.625em;
+    width: 83.3333333333%;
+  }
+  .col.-desktop-col-6-6 {
+    padding: 0.75em 0.625em;
+    width: 100%;
+  }
+}
+
+/**
+ * Layout: Header
+ */
+/**
+ * Layout: Footer
+ */
+/**
+ * Components: Debug
+ */
+body::after {
+  background: -webkit-linear-gradient(top, #1c2124 0%, #292d33 100%);
+  background: linear-gradient(to bottom, #1c2124 0%, #292d33 100%);
+  bottom: 0;
+  color: #73bcee;
+  padding: 0.625em;
+  position: fixed;
+  right: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+@media (min-width: 0em) {
+  body::after {
+    content: "default / min 0px / 6 cols";
+  }
+}
+
+@media (min-width: 30em) {
+  body::after {
+    content: "phablet / min 480px / 6 cols";
+  }
+}
+
+@media (min-width: 48em) {
+  body::after {
+    content: "tablet / min 768px / 6 cols";
+  }
+}
+
+@media (min-width: 64em) {
+  body::after {
+    content: "laptop / min 1024px / 6 cols";
+  }
+}
+
+@media (min-width: 85.375em) {
+  body::after {
+    content: "desktop / min 1366px / 6 cols";
+  }
+}
+
+/**
+ * Components: Buttons
+ */
+/**
+ * Components: Global Overlay
+ *
+ * Usage:
+ *
+ * <div id="global-overlay">
+ *     <div class="table">
+ *         <div class="td">
+ *             <div class="modal">
+ *             </div>
+ *         </div>
+ *     </div>
+ * </div>
+ *
+ * Features:
+ *
+ * - Modal that stays centered to the screen
+ *   but allows scrolling if the height of the
+ *   content is taller than the viewport
+ *
+ * - Adding the class "fullscreen" to the
+ *   #global-overlay element makes the
+ *   modal fill the viewport, whilst
+ *   still retaining its scrolling ability
+ *   if the content is too tall
+ */
+#global-overlay {
+  display: none;
+}
+
+body.modal-visible {
+  overflow: hidden;
+}
+
+body.modal-visible #global-overlay {
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  left: 0;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+body.modal-visible #global-overlay .table {
+  background-color: rgba(0, 0, 0, 0.2);
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+body.modal-visible #global-overlay .table .td {
+  display: table-cell;
+  padding: 1.875em 0;
+  vertical-align: middle;
+}
+
+body.modal-visible #global-overlay .table .td .modal {
+  background-color: #ffffff;
+  color: #000000;
+  cursor: default;
+  margin: 0 auto;
+  width: 50%;
+}
+
+body.modal-visible #global-overlay.fullscreen .table {
+  display: block;
+}
+
+body.modal-visible #global-overlay.fullscreen .table .td {
+  display: block;
+  height: 100%;
+  padding: 0;
+}
+
+body.modal-visible #global-overlay.fullscreen .table .td .modal {
+  height: 100%;
+  margin: 0;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/*# sourceMappingURL=main.css.map */
