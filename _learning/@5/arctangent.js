@@ -13,8 +13,6 @@ window.onload = function () {
       cy = h * .5,
       radius = 200,
       angle = 0,
-      arrowx, 
-      arrowy,
       dx,
       dy;
 
@@ -41,6 +39,12 @@ window.onload = function () {
     rAF(render);
   }
 
+
+  document.addEventListener('mousemove', function (event) {
+    dx = event.clientX - cx
+    dy = event.clientY - cy
+    angle = Math.atan2(dy, dx)
+  });
       
   // If the window is resizes fill the page again.
   window.onresize = function() {
