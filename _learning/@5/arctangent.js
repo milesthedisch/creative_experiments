@@ -13,7 +13,33 @@ window.onload = function () {
       cy = h * .5,
       radius = 200,
       angle = 0,
-      x, y;
+      arrowx, 
+      arrowy,
+      dx,
+      dy;
+
+  render();
+
+  function render () {
+    ctx.clearRect(0, 0, w, h);
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(angle);
+
+    ctx.beginPath();
+    // This is the arrow -> //
+    ctx.moveTo(20, 0);
+    ctx.lineTo(-20, 0);
+    ctx.moveTo(20, 0);
+    ctx.lineTo(10, -10);
+    ctx.moveTo(20, 0);
+    ctx.lineTo(10, 10);
+    ctx.stroke();
+
+    ctx.restore();
+    rAF(render);
+  }
 
       
   // If the window is resizes fill the page again.
@@ -23,4 +49,3 @@ window.onload = function () {
   }
 
 }
-
