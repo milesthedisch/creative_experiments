@@ -11,17 +11,29 @@ window.onload = function () {
 
   var cx = w * .5,
       cy = h * .5,
+      radius = 100,
       angle = 0,
-      dx,
-      dy;
+      _angleX = 0,
+      _angleY = 0,
+      _avX = 0.015,
+      _avY = 0.005,
+      x,y,
+      dx,dy;
 
   render();
 
   function render () {
+    
+    x = cx + Math.cos(_angleX) * radius
+    y = cy + Math.sin(_angleY) * radius
+
+    _angleX = _avX + _angleX
+    _angleY = _avY + _angleY
+
     ctx.clearRect(0, 0, w, h);
 
     ctx.save();
-    ctx.translate(cx, cy);
+    ctx.translate(x, y);
     ctx.rotate(angle);
 
     ctx.beginPath();
@@ -40,8 +52,8 @@ window.onload = function () {
 
 
   document.addEventListener('mousemove', function (event) {
-    dx = event.clientX - cx
-    dy = event.clientY - cy
+    dx = event.clientX - y
+    dy = event.clientY - x
     angle = Math.atan2(dy, dx)
   });
       
