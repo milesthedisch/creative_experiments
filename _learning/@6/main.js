@@ -1,35 +1,12 @@
-// Tests // 
+// Testing vectors // 
+var FIXTURE = vector.create(10, 20);
 
-(function(vector) {
+describe('Vector', function (){
+    
+    beforeEach(function () {
+      console.log('before');
+    });
 
-  var FIXTURE = vector.create(10, 20);
-
-  function expect(val) {
-    return { 
-      toEql: function (expected) {
-        var result = !!(val === expected);
-        if (result) {
-          console.log('\n\t\t'+result);
-        } else {
-          throw new Error('\nexpected ' + expected + '\n' +'actual ' + val);
-        }
-      }
-    }
-  }
-
-  function describe(description, cb) {
-
-    console.log(description);
-    cb();
-  }
-
-  function it(description, cb) {
-    console.log('\t' + description);
-    cb()
-  }
-
-  describe('Vector', function (){
-    beforeEach();
     describe('getX', function () {
       it('Should get 10', function () {
         expect(FIXTURE.getX()).toEql(10);
@@ -56,6 +33,7 @@
       });
     })
 
-  })
+})
 
-})(vector)
+
+
