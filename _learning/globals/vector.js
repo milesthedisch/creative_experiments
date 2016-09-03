@@ -12,11 +12,11 @@ var vector = {
   },
   
   setX: function (value) {
-    this._X = value
+    return this._X = value
   }, 
 
   setY: function (value) { 
-    this._Y = value;
+    return this._Y = value;
   },
 
   setAngle: function (angle) {
@@ -75,12 +75,12 @@ var vector = {
     this._Y -= v2.getY();
   },
 
-  multiplyBy: function (val) {
+  multiplyBy: function (v2) {
     this._X *= v2.getX();
     this._Y *= v2.getY();
   },
 
-  divideBy: function (val) {
+  divideBy: function (v2) {
     this._X /= v2.getX();
     this._Y /= v2.getY();
   },
