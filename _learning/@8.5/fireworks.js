@@ -19,16 +19,23 @@ window.onload = function () {
 
   update();
 
-  function update() {
-    ctx.clearRect(0, 0, w, h);
+  function update(dt) {
 
-    particles.forEach(function(p){
+    if (Math.ceil(dt % 2000) < 20) {
+      gravity = vector.create(0, 0.1);
+      for (var i = 0; i < numParticles; i++) {
+        particles.push(particle.create(cx, cy, Math.random() * 4 + 1, Math.random() * Math.PI * 2));
+      }
+    }
+
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(function (p) {
       p.accelerate(gravity);
       p.update();
       ctx.beginPath();
       ctx.arc(p.position.getX(), p.position.getY(), 5, 0, Math.PI * 2, false);
       ctx.fill();
-    })
+    });
     rAF(update);
   } 
 
