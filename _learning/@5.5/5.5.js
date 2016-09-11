@@ -37,6 +37,7 @@ window.onload = function () {
     ctx.rotate(angle);
 
     ctx.beginPath();
+    
     // This is the arrow -> //
     ctx.moveTo(20, 0);
     ctx.lineTo(-20, 0);
