@@ -89,13 +89,16 @@ window.onload = function () {
     ctx.lineTo(-10, -7);
     ctx.lineTo(-10, 7);
     ctx.lineTo(10, 0);
+
+    if (thrusting) {
+      ctx.moveTo(-10, 0);
+      ctx.lineTo(-18, 0);
+    }
+    
     ctx.stroke();
     ctx.restore();
 
-    // ctx.beginPath();
-    // ctx.arc(ship.position.getX(), ship.position.getY(), 10, 0, Math.PI * 2, false);
-    // ctx.fill();
-
+    // Boundries // 
     if (ship.position.getX() > w) {
       ship.position.setX(0);
     }
