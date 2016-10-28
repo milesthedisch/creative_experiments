@@ -19,7 +19,7 @@ window.onload = function () {
 
   for (var i = 0; i < pAmount; i += 1) {
     var p = particle.create(w / 2, h / 2, (5 * Math.random()).toFixed(2), Math.random() * Math.PI * 2);
-    p.radius = Math.random() * 2 + 20;
+    p.radius = Math.random() * 2 + 1;
     particles.push(p);  
   }
 
